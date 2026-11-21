@@ -42,19 +42,25 @@ Sao chép mục dưới đây cho từng thành viên.
 ### Phần việc phụ trách
 
 - Người kiểm số: đối chiếu kết quả và điền bảng chi phí A1–B4.
+- Đối chiếu cỡ mẫu D1, tỉ lệ mở lại D3 và rà lịch pilot ở CP4.
 
 ### Đóng góp cụ thể
 
 - Đối chiếu kết quả từ `src/lab13.py` với bảng chi phí.
-- Kiểm tra phép tính tiền xem lại: 890 × 2.000 = 1.780.000 đ (simulated).
+- Kiểm tra tiền xem lại: 890 × 2.000 = 1.780.000 đ (simulated).
 - Kiểm tra chi phí cả hệ thống khi giới hạn 2 lần chạy:
   4.093.220 + 234 × 12.000 = 6.901.220 đ (simulated).
 - Cùng trợ lý AI hoàn thiện `report/team/bang_chi_phi.md`.
+- Đối chiếu cỡ mẫu hiệu dụng: 20 × 299 ÷ 6,96 ≈ 859,2 yêu cầu mỗi nhóm.
+- Đối chiếu tỉ lệ mở lại: 51/1.200 = 4,25% toàn mẫu và 39/982 = 3,97% trong phạm vi pilot.
+- Cùng trợ lý AI rà và bổ sung lịch dự kiến vào kế hoạch pilot; chạy chương trình và kiểm tra cú pháp YAML.
 
 ### Bằng chứng
 
-- File: `report/team/bang_chi_phi.md`.
-- Commit: `6ef2632` — Hoan thanh bang chi phi A1-B4.
+- `report/team/bang_chi_phi.md` — commit `6ef2632`.
+- `report/team/pilot_plan.yaml` — kết quả D1, D3 và lịch pilot.
+- `report/team/2A202603582_NguyenMinhDat.md` — báo cáo cá nhân, commit `0617e27`.
+
 
 ## HoangLamMinh-2A202603566
 
