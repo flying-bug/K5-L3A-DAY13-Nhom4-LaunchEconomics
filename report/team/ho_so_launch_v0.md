@@ -21,6 +21,6 @@ Phạm vi đề xuất pilot: **chỉ `noi_dia` + `hang_nang`** (982/1.200 yêu 
 **Đề xuất: Go có điều kiện**, chỉ cho pilot `noi_dia` + `hang_nang`, chia theo nhân viên 20 + 20. Loại `quoc_te` (1,88×) và `doi_tac` (0,85×, điều khoản riêng) khỏi pilot. Điều kiện:
 
 - Sửa khoá chống trùng khi ghi hoàn và chỉ báo "đã hoàn" khi sổ cái trả ok (lỗi hệ thống, ca 7 và 20); đối soát sổ cái mỗi giờ, ngưỡng 0 ca. Phụ trách: Kỹ sư trưởng agent. Kiểm tra: 2026-11-30, trước ngày bắt đầu.
-- Ký chấp nhận mức chênh 6 điểm (power 0,64 nếu tác động thật chỉ 5 điểm) và chốt trước chỉ số chính, ngưỡng, luật dừng, ngày quyết định 2027-01-05. Phụ trách: Giám đốc vận hành. Kiểm tra: 2026-11-30.
+- Ký chấp nhận mức chênh 6 điểm (power 0,64 nếu tác động thật chỉ 5 điểm) và chốt trước chỉ số chính, ngưỡng, luật dừng, ngày quyết định 2027-01-08. Phụ trách: Giám đốc vận hành. Kiểm tra: 2026-11-30.
 - Bật đủ event có `trace_id`; thay phút xem lại và làm lại simulated bằng phút đo thật từ `staff_review_decision`, `staff_rework_completed`. Phụ trách: PM trợ lý hoàn phí. Kiểm tra: 2026-12-08, hết tuần 1.
 - Giảm xem lại theo bậc (xem lại 100% thì 0,98×, không tiết kiệm), chỉ giảm khi tỉ lệ sửa + bỏ < 15%; mục tiêu mỗi lần xem lại ≤ 5,1 phút. Phụ trách: Trưởng nhóm CSKH. Kiểm tra: 2026-12-15, cuối bước rollout 0.25.
