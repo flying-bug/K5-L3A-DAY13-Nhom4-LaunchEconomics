@@ -15,10 +15,11 @@ Kiểm tra kết quả tính chi phí, điền bảng chi phí A1–B4 và đố
 
 - Đối chiếu kết quả A1–A4 và B1–B4 từ chương trình với bảng chi phí.
 - Kiểm tra phép tính tiền xem lại và chi phí cả hệ thống.
-- Cùng trợ lý AI điền `report/team/bang_chi_phi.md`.
 - Đối chiếu kết quả cỡ mẫu D1 và tỉ lệ mở lại D3 với `pilot_plan.yaml`.
 - Rà lịch pilot, bổ sung lịch dự kiến và điều kiện thu đủ mẫu, theo dõi đủ 7 ngày.
 - Chạy lại chương trình và kiểm tra file YAML đọc được.
+- Đọc hồ sơ launch của nhóm XYZ, tham gia đánh giá chéo Gate 2a và ghi kết quả vào `report/team/phieu_cham.md`.
+- Tham gia đặt câu hỏi phản biện về điều kiện giảm tỉ lệ xem lại và ghi lại câu trả lời của nhóm XYZ.
 
 ## 4. Bằng chứng
 
