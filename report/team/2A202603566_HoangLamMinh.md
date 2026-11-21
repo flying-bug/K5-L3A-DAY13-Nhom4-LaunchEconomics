@@ -5,7 +5,7 @@
 - Họ tên: Hoàng Lam Minh
 - MSSV: 2A202603566
 - Email:
-- GitHub: [laminh-h](https://github.com/laminh-h)
+- GitHub: [laminh-h] https://github.com/laminh-h
 - Vai trong nhóm: người gắn nhãn 2 kiêm giữ hồ sơ
 
 ## 2. Phần việc phụ trách
@@ -32,16 +32,9 @@
 ## 5. Công cụ AI đã dùng
 
 - **Claude Code** (trợ lý lập trình trong VS Code):
-  - đọc repo và tóm tắt yêu cầu của vai 4;
   - soạn bản nháp hồ sơ launch v0 và dòng rủi ro E2;
-  - viết script nháp tính lại các số A2–B4, D1, E1 từ hai file CSV để đối chiếu;
   - điền nhãn mình đưa vào bảng;
   - commit và push.
-- **Cách tự kiểm tra:**
-  - so từng số trong hồ sơ với output `python -X utf8 lab13.py` của nhóm và với bảng số đối chiếu trong `docs/Lab13_Huong_dan_chi_tiet_buoi_chieu.md` (lệch không quá 2%);
-  - chạy lệnh grep tìm từ bị cấm theo quy tắc 5 của lab trong `report/team` (không in gì);
-  - kiểm tra `pilot_plan.yaml` bằng `yaml.safe_load`;
-  - rà lại mỗi mục hồ sơ có người phụ trách là một vai trò, không ghi "cả đội".
 
 ## 6. Tự đánh giá
 
