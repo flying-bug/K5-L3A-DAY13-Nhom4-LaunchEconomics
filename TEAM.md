@@ -13,7 +13,7 @@
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Hoàng Lam Minh | 2A202603566 |  | https://github.com/laminh-h | Người gắn nhãn 2, kiêm giữ hồ sơ |
 |   2 |        |      |       |        |         |
-|   3 |        |      |       |        |         |
+|   3 | Đinh Thị Hường | 2A202603569 |  | https://github.com/dihnhuonq130104 | Người gắn nhãn 1 |
 |   4 | Nguyễn Minh Đạt | 2A202603582 | nguyenminhdat6401@gmail.com | https://github.com/nguyenminhdat6401 | Người kiểm số |
 
 Bốn vai của lab:
@@ -72,3 +72,21 @@ Sao chép mục dưới đây cho từng thành viên.
 
 - File: `report/team/ho_so_launch_v0.md`, `report/team/bang_loi.md` (cột người 2), `report/team/chi_so.md` (E2).
 - Commit: `7caf86c` (nhãn người 2, hồ sơ v0), `6d7a582` (E2, hồ sơ mục 5).
+## DinhThiHuong-2A202603569
+
+### Phần việc phụ trách
+
+- Người gắn nhãn 1: phân loại 20 ca lỗi ở CP3 và theo dõi điều kiện hoàn thành checkpoint.
+
+### Đóng góp cụ thể
+
+- Viết nhãn và lý do phân loại 20 ca theo năm loại lỗi Google PAIR; rà và cập nhật bảng lỗi.
+- Đối chiếu với bộ nhãn của Hoàng Lâm Minh: trùng 19/20 ca, đạt 95%.
+- Cùng nhóm thống nhất ca 8 là Hệ thống; giữ nguyên hai nhãn ban đầu và ghi quy tắc phân biệt với lỗi Ngầm.
+- Hoàn thiện bảng khắc phục cho 5 ca đại diện đủ năm loại, có cách phát hiện đo được và vai trò phụ trách.
+
+### Bằng chứng
+
+- File: `report/team/bang_loi.md`.
+- Commit: `876cd32` — CP3: hoan thanh bang loi va doi chieu nhan.
+- Báo cáo cá nhân: `report/team/2A202603569_DinhThiHuong.md`.
