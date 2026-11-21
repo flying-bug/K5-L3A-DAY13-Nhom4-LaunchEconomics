@@ -4,7 +4,7 @@
 
 ## Hai bộ nhãn độc lập
 
-Người gắn nhãn 1: Đinh Thị Hường  · Người gắn nhãn 2: Hoàng Lâm Minh (lấy nguyên bộ nhãn đã push ở commit 7caf86c).
+Người gắn nhãn 1: Đinh Thị Hường  · Người gắn nhãn 2: Hoàng Lam Minh (lấy nguyên bộ nhãn đã push ở commit 7caf86c).
 
 
 | Ca | Nhãn người 1 | Nhãn người 2 | Trùng? | Nhãn thống nhất |

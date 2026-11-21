@@ -11,7 +11,7 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
+|   1 | Hoàng Lam Minh | 2A202603566 |  | https://github.com/laminh-h | Người gắn nhãn 2, kiêm giữ hồ sơ |
 |   2 |        |      |       |        |         |
 |   3 |        |      |       |        |         |
 |   4 | Nguyễn Minh Đạt | 2A202603582 | nguyenminhdat6401@gmail.com | https://github.com/nguyenminhdat6401 | Người kiểm số |
@@ -56,3 +56,19 @@ Sao chép mục dưới đây cho từng thành viên.
 - File: `report/team/bang_chi_phi.md`.
 - Commit: `6ef2632` — Hoan thanh bang chi phi A1-B4.
 
+## HoangLamMinh-2A202603566
+
+### Phần việc phụ trách
+
+- Người gắn nhãn 2, kiêm giữ hồ sơ: điền `report/team/ho_so_launch_v0.md` từ đầu buổi; gắn nhãn 20 ca độc lập ở CP3.
+
+### Đóng góp cụ thể
+
+- Dựng hồ sơ launch v0 đủ bảy mục, đối chiếu từng con số với output `src/lab13.py` (A2–B4, D1, E1) và các file `bang_chi_phi.md`, `bang_loi.md`, `pilot_plan.yaml`, `chi_so.md`; ghi nhãn simulated; đề xuất Go có điều kiện với bốn điều kiện, mỗi điều kiện có người phụ trách và ngày kiểm tra.
+- Gắn độc lập 20 ca lỗi (cột "Nhãn người 2"), trùng 19/20 = 95% với người gắn nhãn 1.
+- Bổ sung E2 trong `chi_so.md`: ngưỡng tỉ lệ làm lại 7%/tuần và dòng rủi ro khối lượng thấp (+2.370 đ/việc ở nửa khối lượng, simulated) để hồ sơ mục 7 khớp bằng chứng.
+
+### Bằng chứng
+
+- File: `report/team/ho_so_launch_v0.md`, `report/team/bang_loi.md` (cột người 2), `report/team/chi_so.md` (E2).
+- Commit: `7caf86c` (nhãn người 2, hồ sơ v0), `6d7a582` (E2, hồ sơ mục 5).
