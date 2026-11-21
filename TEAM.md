@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Hoàng Lam Minh | 2A202603566 |  | https://github.com/laminh-h | Người gắn nhãn 2, kiêm giữ hồ sơ |
-|   2 | Đỗ Duy Bộ | 2A202603591 | https://github.com/flying-bug |        |         |
+|   2 | Đỗ Duy Bộ | 2A202603591 | duybohshl@gmail.com | https://github.com/flying-bug | Nhóm trưởng, người viết code |
 |   3 | Đinh Thị Hường | 2A202603569 |  | https://github.com/dihnhuonq130104 | Người gắn nhãn 1 |
 |   4 | Nguyễn Minh Đạt | 2A202603582 | nguyenminhdat6401@gmail.com | https://github.com/nguyenminhdat6401 | Người kiểm số |
 
@@ -61,6 +61,26 @@ Sao chép mục dưới đây cho từng thành viên.
 - `report/team/pilot_plan.yaml` — kết quả D1, D3 và lịch pilot.
 - `report/team/2A202603582_NguyenMinhDat.md` — báo cáo cá nhân, commit `0617e27`.
 
+
+## DoDuyBo-2A202603591
+
+### Phần việc phụ trách
+
+- Nhóm trưởng: chia vai, theo dõi tiến độ năm checkpoint, gộp nhánh và chốt bài nộp.
+- Người viết code: viết và chạy `src/lab13.py` cho Nhiệm vụ A (CP1), B (CP2), D (CP4); viết `report/team/pilot_plan.yaml`.
+
+### Đóng góp cụ thể
+
+- CP1: viết ba hàm A1 (ba phép thử ĐẠT 1,20 · 1,25 · 1,25) và hàm `mo_hinh`; chi phí mỗi việc thành công 4.472 đ, gấp 16,3 lần hoá đơn token + tool chia số yêu cầu (simulated); tách theo loại (A3) và cộng chi phí cố định 40 triệu đ/tháng (A4).
+- CP2: bảng độ nhạy 9 kịch bản có `assert` tự kiểm tra tuyến tính; B3: giới hạn 2 lần rẻ nhất cho công ty (6.901.220 đ), giới hạn 1 lần cho chi phí mỗi việc thấp nhất (4.111 đ) nhưng đẩy thêm 85 việc sang nhân viên (simulated).
+- CP4: tính D1 trong code (1.251 · 3.103 · 1.000 · 300 · m ≥ 299, DE 6,96), đối chiếu statsmodels; chọn chia theo nhân viên 20 + 20, MDE 6 điểm, ghi power 0,64 nếu tác động thật là 5 điểm; tính tỉ lệ mở lại hiện tại 4,25% trước khi đặt luật an toàn; viết ba luật dừng.
+- Gộp nhánh: xử lý xung đột mục 5, 6 của `ho_so_launch_v0.md`; đồng bộ ngày quyết định 2027-01-08 trong `pilot_plan.yaml`; viết `report/team/group_report.md`.
+
+### Bằng chứng
+
+- Commit: `0761df0` (CP1), `bcacb19` (CP2), `77be503` (CP4), `2d332ab` (gộp CP4 với CP5).
+- File: `src/lab13.py`, `report/team/pilot_plan.yaml`, `report/team/group_report.md`.
+- Báo cáo cá nhân: `report/team/2A202603591_DoDuyBo.md`.
 
 ## HoangLamMinh-2A202603566
 

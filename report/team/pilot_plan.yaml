@@ -16,7 +16,7 @@
 #   1. Đối chứng chạy cùng thời gian: Có, 20 nhân viên đối chứng làm cùng tuần, cùng depot, cùng loại yêu cầu.
 #   2. Chia ngẫu nhiên hay do người chọn: Ngẫu nhiên, bốc thăm bằng code với seed ghi trước, phân tầng theo depot; quản lý không được chọn người.
 #   3. Ảnh hưởng gián tiếp và cách giảm: Có rủi ro nhân viên đối chứng chép câu trả lời của trợ lý trong cùng depot; giảm bằng quyền theo tài khoản, log agent_opened theo staff_id, yêu cầu đối chứng không được chuyển sang người dùng trợ lý.
-#   4. Chỉ số chính, ngưỡng, ngày quyết định đã viết trước: Có, chỉ số dong_trong_24h_khong_mo_lai_7_ngay, MDE 6 điểm, ba luật dừng và ngày 2027-01-05 chốt trước ngày bắt đầu 2026-12-02.
+#   4. Chỉ số chính, ngưỡng, ngày quyết định đã viết trước: Có, chỉ số dong_trong_24h_khong_mo_lai_7_ngay, MDE 6 điểm, ba luật dừng và ngày 2027-01-08 chốt trước ngày bắt đầu 2026-12-02.
 #   5. Ít nhất 20 cụm mỗi nhóm: Có, đúng 20 cụm (nhân viên) mỗi nhóm.
 #
 # Đánh đổi đã chấp nhận (nếu cách chia chưa đạt cả hai điều kiện):
@@ -59,7 +59,7 @@ pilot:
   identifiability:
     concurrent_control: "Có: 20 nhân viên đối chứng làm cùng thời gian, cùng depot, cùng loại yêu cầu"
     spillover_risk: "Trung bình: nhân viên trong cùng depot có thể chia sẻ câu trả lời; giảm bằng quyền theo tài khoản, log agent_opened theo staff_id, cấm chuyển yêu cầu đối chứng sang người dùng trợ lý; nếu > 2% yêu cầu đối chứng có agent_opened thì báo cáo là vi phạm thiết kế"
-    predeclared: "Có: chỉ số chính, MDE 6 điểm, ba luật dừng, seed bốc thăm và ngày quyết định 2027-01-05 chốt và lưu trong repo trước 2026-12-02"
+    predeclared: "Có: chỉ số chính, MDE 6 điểm, ba luật dừng, seed bốc thăm và ngày quyết định 2027-01-08 chốt và lưu trong repo trước 2026-12-02"
   stop_rules:
     - "NẾU tỉ lệ mở lại 7 ngày (ticket_reopened) của nhóm trợ lý cao hơn đối chứng ≥ 2 điểm hoặc vượt 6%, hoặc có ≥ 1 ca hoàn trùng qua đối soát sổ cái TRONG 3 ngày liên tiếp (ca hoàn trùng: ngay khi phát hiện) THÌ Giám đốc vận hành tắt trợ lý cho cả nhóm can thiệp trong 30 phút và Kỹ sư trưởng agent điều tra theo trace_id KHÔNG THÌ không được sang bước rollout tiếp theo"
     - "NẾU chi phí mỗi việc thành công trong phạm vi (gồm cố định 40 triệu đ/tháng) > 8.000 đ TRONG 2 tuần liên tiếp (hiện 4.599 đ ở 45.000 yc/tháng, simulated) THÌ PM trợ lý hoàn phí thu hẹp về noi_dia và giới hạn tối đa 2 lần chạy KHÔNG THÌ không được giữ hang_nang trong phạm vi"
