@@ -39,5 +39,6 @@ Chỉ số đóng trong 24 giờ và không mở lại trong đợt chạy thử
 
 | Rủi ro | Tác động đã tính | Dấu hiệu theo dõi | Hành động | Người phụ trách |
 | --- | --- | --- | --- | --- |
-| Số ca làm lại tăng gấp đôi | Chi phí lên 6.787 đ/việc, tăng 51,8% (simulated) | Tỉ lệ và thời gian làm lại tăng theo tuần | Rà các trace làm lại và xem xét thu hẹp phạm vi pilot | PM trợ lý hoàn phí |
+| Số ca làm lại tăng gấp đôi | Chi phí lên 6.787 đ/việc, tăng 51,8% (simulated) | Tỉ lệ làm lại theo tuần > 7% (đợt chạy thử: 48/982 = 4,9% trong phạm vi `noi_dia` + `hang_nang`) | Rà các trace làm lại và xem xét thu hẹp phạm vi pilot | PM trợ lý hoàn phí |
 | Phải xem lại 100% | Chi phí 11.743 đ/việc, bằng 0,98× mức 12.000 đ (simulated) | Tỉ lệ và thời gian xem lại duy trì cao | Đánh giá điều kiện giảm xem lại theo bậc, đồng thời theo dõi an toàn | Trưởng nhóm CSKH |
+| Khối lượng thấp hơn dự kiến | Chi phí cố định 40 triệu đ/tháng: +1.185 đ/việc ở 45.000 yc/tháng (tổng 4.599 đ = 0,38×), +2.370 đ/việc nếu khối lượng còn một nửa (tổng 5.784 đ = 0,48×) (simulated) | Số việc thành công theo tuần < 50% kế hoạch | Không mở rộng pilot, xem lại hợp đồng chi phí cố định | PM trợ lý hoàn phí |
