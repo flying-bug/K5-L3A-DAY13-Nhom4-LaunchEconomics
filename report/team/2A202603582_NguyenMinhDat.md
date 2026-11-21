@@ -33,7 +33,7 @@ Kiểm tra kết quả tính chi phí, điền bảng chi phí A1–B4 và đố
 
 ## 5. Công cụ AI đã dùng
 
-Tôi dùng Codex để giải thích yêu cầu, chạy code, kiểm tra số và sửa lịch pilot. Tôi tự chạy chương trình, đối chiếu kết quả với hướng dẫn và kiểm tra lại các phép tính ở mục 4.
+Tôi dùng Codex để giải thích yêu cầu, chạy code, kiểm tra số, kiểm tra lại pilot. Tôi tự chạy chương trình, đối chiếu kết quả với hướng dẫn và kiểm tra lại các phép tính ở mục 4.
 
 ## 6. Tự đánh giá
 
