@@ -46,8 +46,6 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Đóng góp cụ thể
 
-### Đóng góp cụ thể
-
 - Đối chiếu kết quả từ `src/lab13.py` với bảng chi phí.
 - Kiểm tra tiền xem lại: 890 × 2.000 = 1.780.000 đ (simulated).
 - Kiểm tra chi phí cả hệ thống khi giới hạn 2 lần chạy: 4.093.220 + 234 × 12.000 = 6.901.220 đ (simulated).
