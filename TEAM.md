@@ -5,7 +5,7 @@
 - Tên nhóm: Nhom4
 - Lớp: L3A
 - Repo nhóm: `K5-L3A-DAY13-Nhom4-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt: https://github.com/flying-bug/K5-L3A-DAY13-Nhom4-LaunchEconomics, main, 
+- URL repo, nhánh nộp, commit chốt: https://github.com/flying-bug/K5-L3A-DAY13-Nhom4-LaunchEconomics, main, `0e13791`
 
 ## Thành viên
 
