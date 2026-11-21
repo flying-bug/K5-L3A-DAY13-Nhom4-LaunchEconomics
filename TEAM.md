@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Hoàng Lam Minh | 2A202603566 |  | https://github.com/laminh-h | Người gắn nhãn 2, kiêm giữ hồ sơ |
-|   2 |        |      |       |        |         |
+|   2 | Đỗ Duy Bộ | 2A202603591 | https://github.com/flying-bug |        |         |
 |   3 | Đinh Thị Hường | 2A202603569 |  | https://github.com/dihnhuonq130104 | Người gắn nhãn 1 |
 |   4 | Nguyễn Minh Đạt | 2A202603582 | nguyenminhdat6401@gmail.com | https://github.com/nguyenminhdat6401 | Người kiểm số |
 
