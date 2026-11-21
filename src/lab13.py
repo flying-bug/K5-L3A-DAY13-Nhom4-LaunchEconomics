@@ -257,6 +257,87 @@ if __name__ == '__main__':
         x = (BASELINE * tc_pv - so_lam_lai * phut_lam * LUONG_PHUT - token_tool_pv) / (so_co_ok * LUONG_PHUT)
         print(f'  Hoà vốn (làm lại {vnd(phut_lam, 1)} phút): mỗi lần xem lại ≤ {vnd(x, 1)} phút [simulated]')
 
-    # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
-    #   from statsmodels.stats.proportion import proportion_effectsize
-    #   from statsmodels.stats.power import NormalIndPower
+    # ---------- D1 · Cỡ mẫu theo ba cách chia ----------
+    print('\n=== D1 · Cỡ mẫu (baseline 0,70; +5 điểm; alpha 0,05; power 0,8; ICC 0,02) ===')
+    from statistics import NormalDist
+    from statsmodels.stats.proportion import proportion_effectsize
+    from statsmodels.stats.power import NormalIndPower
+
+    P1, MDE, ALPHA, POWER, ICC = 0.70, 0.05, 0.05, 0.80, 0.02
+
+    def co_mau(p1, p2, alpha=ALPHA, power=POWER):
+        """Cỡ mẫu mỗi nhóm khi chia theo yêu cầu (so sánh hai tỉ lệ, hai phía)."""
+        za, zb = NormalDist().inv_cdf(1 - alpha / 2), NormalDist().inv_cdf(power)
+        pb = (p1 + p2) / 2
+        return math.ceil((za * math.sqrt(2 * pb * (1 - pb))
+                          + zb * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) ** 2 / (p2 - p1) ** 2)
+
+    def he_so_thiet_ke(m, icc=ICC):
+        return 1 + (m - 1) * icc
+
+    def n_hieu_dung(c, m, icc=ICC):
+        """Cỡ mẫu hiệu dụng của c cụm, mỗi cụm m yêu cầu; luôn < c / ICC."""
+        return c * m / he_so_thiet_ke(m, icc)
+
+    # a) Chia theo yêu cầu
+    n_a = co_mau(P1, P1 + MDE)
+    print(f'a) Theo yêu cầu: co_mau(0,70; 0,75) = {vnd(n_a)} yêu cầu mỗi nhóm')
+
+    # b) Theo nhân viên, m = 75 yêu cầu mỗi người
+    m_b = 75
+    de_b = he_so_thiet_ke(m_b)
+    n_b = math.ceil(n_a * de_b)
+    nv_b = math.ceil(n_b / m_b)
+    so_nv = 40  # quy mô công ty theo đề: khoảng 40 nhân viên CSKH (CSV chỉ có 20 người của 6 depot chạy thử)
+    print(f'b) Theo nhân viên, m = {m_b}: DE = {vnd(de_b, 2)}; n = {vnd(n_a)} × {vnd(de_b, 2)} = {vnd(n_b)}'
+          f' mỗi nhóm → {nv_b} người mỗi nhóm, tổng {2 * nv_b} > {so_nv} nhân viên: KHÔNG ĐỦ NGƯỜI')
+
+    # c) 20 nhân viên mỗi nhóm: trần cỡ mẫu hiệu dụng c / ICC khi m → ∞
+    tran_c = 20 / ICC
+    print(f'c) 20 nhân viên mỗi nhóm: n hiệu dụng < 20 / {vnd(ICC, 2)} = {vnd(tran_c)}'
+          f' {"<" if tran_c < n_a else "≥"} {vnd(n_a)}: {"KHÔNG ĐẠT" if tran_c < n_a else "ĐẠT"}')
+
+    # d) 6 depot mỗi nhóm
+    tran_d = 6 / ICC
+    print(f'd) 6 depot mỗi nhóm: n hiệu dụng < 6 / {vnd(ICC, 2)} = {vnd(tran_d)} (và chỉ 6 cụm < 20): KHÔNG ĐẠT')
+
+    # e) Mức chênh 6 điểm, 20 nhân viên mỗi nhóm: giải 20m / (1 + (m-1)·ICC) ≥ n_e
+    n_e = co_mau(P1, P1 + 0.06)
+    c_e = 20
+    m_e = math.ceil(n_e * (1 - ICC) / (c_e - n_e * ICC))
+    de_e = he_so_thiet_ke(m_e)
+    print(f'e) Mức chênh 6 điểm: n = {vnd(n_e)} mỗi nhóm; 20m / (1 + (m − 1) × 0,02) ≥ {n_e}'
+          f' → m ≥ {m_e} yêu cầu mỗi người (DE {vnd(de_e, 2)}, n hiệu dụng {vnd(n_hieu_dung(c_e, m_e), 0)})')
+    # Thời gian gom đủ m_e yêu cầu mỗi người: 1.500 yc/ngày chia 40 người, chỉ phần trong phạm vi noi_dia + hang_nang
+    yc_ngay_nv = 1500 / so_nv * len(pv) / len(reqs)
+    print(f'   Tổng {vnd(2 * c_e * m_e)} yêu cầu; mỗi người ~{vnd(yc_ngay_nv, 1)} yc trong phạm vi/ngày'
+          f' → cần ~{math.ceil(m_e / yc_ngay_nv)} ngày làm việc ở bước 0.50 [quy mô từ đề]')
+
+    # Đánh đổi: thiết kế cho 6 điểm nhưng tác động thật chỉ 5 điểm thì power còn bao nhiêu?
+    es5 = proportion_effectsize(P1 + MDE, P1)
+    power_5 = NormalIndPower().power(effect_size=es5, nobs1=n_e, alpha=ALPHA, ratio=1.0)
+    print(f'Đánh đổi: n = {n_e}/nhóm, nếu tác động thật chỉ 5 điểm thì power = {vnd(power_5, 2)} (< 0,80)')
+    # Kiểm tra chéo công thức tay với statsmodels (arcsine, nên lệch nhẹ)
+    n_sm = NormalIndPower().solve_power(effect_size=es5, alpha=ALPHA, power=POWER, ratio=1.0)
+    print(f'Đối chiếu statsmodels (arcsine): {vnd(n_sm, 0)} mỗi nhóm cho 5 điểm (lệch {pct((n_sm / n_a - 1) * 100)})')
+
+    # Dữ liệu thực tế về cụm trong mẫu 1.200 yêu cầu
+    yc_moi_nv = reqs.groupby('staff_id').size()
+    print(f'Mẫu CSV: {reqs.staff_id.nunique()} nhân viên, {reqs.depot.nunique()} depot; trung bình'
+          f' {vnd(yc_moi_nv.mean(), 1)} yc/nhân viên (min {yc_moi_nv.min()}, max {yc_moi_nv.max()})')
+
+    # ---------- D3 · Tỉ lệ mở lại hiện tại trước khi đặt luật an toàn ----------
+    print('\n=== D3 · Tỉ lệ mo_lai_trong_7_ngay hiện tại ===')
+    mo_lai = reqs.mo_lai_trong_7_ngay.astype(int)
+    print(f'Toàn bộ: {vnd(mo_lai.mean() * 100, 2)}% ({mo_lai.sum()}/{len(reqs)})')
+    mo_lai_pv = pv.mo_lai_trong_7_ngay.astype(int)
+    print(f'Phạm vi noi_dia + hang_nang: {vnd(mo_lai_pv.mean() * 100, 2)}% ({mo_lai_pv.sum()}/{len(pv)})')
+    for loai in ['noi_dia', 'hang_nang', 'quoc_te', 'doi_tac']:
+        r = reqs[reqs.loai == loai].mo_lai_trong_7_ngay.astype(int)
+        print(f'  {loai:10s} {vnd(r.mean() * 100, 2):>6s}% ({r.sum()}/{len(r)})')
+    print('→ Ngưỡng tuyệt đối 3% sẽ dừng pilot ngay tuần đầu; dùng chênh so với đối chứng ≥ +2 điểm, trần tuyệt đối 6%')
+    # Chỉ số chính hiện tại (không có đối chứng, chỉ để tham khảo)
+    chinh = ((reqs.dong_trong_24h.astype(int) == 1) & (mo_lai == 0)).mean()
+    chinh_pv = ((pv.dong_trong_24h.astype(int) == 1) & (mo_lai_pv == 0)).mean()
+    print(f'Chỉ số chính trong đợt chạy thử: {vnd(chinh * 100, 2)}% toàn bộ · {vnd(chinh_pv * 100, 2)}% trong phạm vi'
+          f' (chưa có đối chứng, không kết luận tác động)')
