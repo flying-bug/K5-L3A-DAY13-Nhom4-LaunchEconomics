@@ -39,6 +39,11 @@ pilot:
     randomized: true
     method: "Bốc thăm bằng code, seed ghi trước, phân tầng theo depot; 20 nhân viên dùng trợ lý, 20 nhân viên đối chứng"
   rollout: [0.10, 0.25, 0.50]     # mỗi bước một tuần; 4 → 10 → 20 nhân viên dùng trợ lý; chỉ đo chỉ số chính từ bước 0.50, bước này kéo dài ≥ 10 ngày làm việc để mỗi người đủ 299 yêu cầu
+  rollout_schedule:
+    - "02/12–08/12/2026: bước 10%"
+    - "09/12–15/12/2026: bước 25%"
+    - "16/12–29/12/2026: bước 50%, dự kiến thu mẫu trong 10 ngày làm việc"
+  sample_followup: "Chỉ chốt mẫu khi mỗi nhân viên đạt ít nhất 299 yêu cầu trong phạm vi; theo dõi từng yêu cầu đủ 7 ngày. Nếu chưa đạt, tiếp tục thu mẫu và điều chỉnh ngày quyết định."
   primary_metric:
     name: dong_trong_24h_khong_mo_lai_7_ngay
     baseline: 0.70
@@ -61,7 +66,7 @@ pilot:
     - "NẾU tỉ lệ bỏ qua gợi ý (staff_review_decision sửa hoặc bỏ / số được xem lại) > 40% TRONG 1 tuần (hiện 27,12%), hoặc < 60% yêu cầu của nhóm trợ lý có agent_opened THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày và báo cáo nguyên nhân KHÔNG THÌ không được chuyển bước rollout"
   interim_looks: "chỉ kiểm tra chỉ số an toàn (mở lại 7 ngày, hoàn trùng) hằng ngày và chi phí, mức dùng hằng tuần; không xem chỉ số chính trước ngày quyết định để tránh dừng sớm vì nhiễu"
   rollback: "Giám đốc vận hành bấm cờ tắt trợ lý (feature flag theo staff_id), hiệu lực trong 30 phút; khách được phục vụ bằng luồng nhân viên tự làm như hiện tại (12.000 đ/yêu cầu, 6 phút); các yêu cầu đang dở được chuyển nguyên trạng cho nhân viên kèm trace_id"
-  decision_date: "2027-01-05"
+  decision_date: "2027-01-08"
   start_date: "2026-12-02"
   simulated_inputs:
     - "phut_xem_lai_simulated và phut_lam_lai_simulated trong logix_requests.csv (chi phí mỗi việc thành công 4.472 đ; phạm vi 3.414 đ, 4.599 đ gồm cố định)"
