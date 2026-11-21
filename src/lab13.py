@@ -94,6 +94,11 @@ def vnd(x, so_le=0):
     return s.replace(',', '_').replace('.', ',').replace('_', '.')
 
 
+def pct(x):
+    """Phần trăm có dấu: +5,6% · −2,8%."""
+    return ('+' if x >= 0 else '−') + vnd(abs(x), 1) + '%'
+
+
 if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
@@ -161,7 +166,97 @@ if __name__ == '__main__':
         print(f'  {ten:20s} việc TC/tháng {vnd(tc_thang):>7s} · cố định/việc {vnd(cd_moi_viec):>6s} đ'
               f' · cps + cố định {vnd(tong_moi_viec):>6s} đ = {vnd(tong_moi_viec / BASELINE, 2)}× [simulated]')
 
-    # TODO CP2 · Nhiệm vụ B: đổi từng yếu tố, ghi vào bảng độ nhạy.
+    # ---------- B1 · Đổi từng yếu tố ----------
+    print('\n=== B1 · Bảng độ nhạy: đổi từng yếu tố (toàn bộ 1.200 yêu cầu) ===')
+    goc = mo_hinh(runs, reqs)['cps']
+    kich_ban = {
+        'Giá token gấp đôi':          dict(gia_vao=52, gia_ra=260),
+        'Giá token giảm một nửa':     dict(gia_vao=13, gia_ra=65),
+        'Tỉ lệ xem lại gấp đôi':      dict(he_so_xem_lai=2),
+        'Tỉ lệ xem lại giảm một nửa': dict(he_so_xem_lai=0.5),
+        'Số ca làm lại gấp đôi':      dict(he_so_lam_lai=2),
+        'Số ca làm lại giảm một nửa': dict(he_so_lam_lai=0.5),
+        'Lương nhân viên tăng 25%':   dict(luong_phut=2500),
+        'Chỉ cho chạy tối đa 2 lần':  dict(max_lan_chay=2),
+        'Chỉ cho chạy 1 lần':         dict(max_lan_chay=1),
+    }
+    print(f"{'Gốc (A2)':28s} {vnd(goc):>7s} đ")
+    do_nhay = {}
+    for ten, kw in kich_ban.items():
+        cps = mo_hinh(runs, reqs, **kw)['cps']
+        do_nhay[ten] = (cps / goc - 1) * 100
+        print(f'{ten:28s} {vnd(cps):>7s} đ  {pct(do_nhay[ten]):>7s}  [simulated]')
+    # Tự kiểm tra: "giảm một nửa" = ½ mức tăng của "gấp đôi" (mô hình tuyến tính)
+    for cap in ['Giá token', 'Tỉ lệ xem lại', 'Số ca làm lại']:
+        gd, gn = do_nhay[f'{cap} gấp đôi'], do_nhay[f'{cap} giảm một nửa']
+        assert abs(gn + gd / 2) < 1e-6, f'{cap}: giảm một nửa phải bằng −½ gấp đôi'
+    print('Tự kiểm tra tuyến tính (giảm một nửa = −½ gấp đôi): ĐẠT')
+
+    # ---------- B2 · Đổi một cặp và xếp hạng ----------
+    print('\n=== B2 · Đổi một cặp: giá token gấp đôi + xem lại gấp đôi ===')
+    cps_cap = mo_hinh(runs, reqs, gia_vao=52, gia_ra=260, he_so_xem_lai=2)['cps']
+    tong_rieng = do_nhay['Giá token gấp đôi'] + do_nhay['Tỉ lệ xem lại gấp đôi']
+    print(f'cps = {vnd(cps_cap)} đ ({pct((cps_cap / goc - 1) * 100)}) · tổng hai tác động riêng'
+          f' = {pct(tong_rieng)} → cộng tuyến tính [simulated]')
+    # Xếp hạng theo biên độ (gấp đôi − giảm một nửa) của từng yếu tố
+    bien_do = {
+        'Số ca làm lại':   do_nhay['Số ca làm lại gấp đôi'] - do_nhay['Số ca làm lại giảm một nửa'],
+        'Tỉ lệ xem lại':   do_nhay['Tỉ lệ xem lại gấp đôi'] - do_nhay['Tỉ lệ xem lại giảm một nửa'],
+        'Lương nhân viên': do_nhay['Lương nhân viên tăng 25%'],
+        'Giá token':       do_nhay['Giá token gấp đôi'] - do_nhay['Giá token giảm một nửa'],
+        'Giới hạn chạy':   -do_nhay['Chỉ cho chạy 1 lần'],
+    }
+    print('Xếp hạng yếu tố (theo biên độ thay đổi cps):')
+    for i, (ten, bd) in enumerate(sorted(bien_do.items(), key=lambda x: -x[1]), 1):
+        print(f'  {i}. {ten:16s} biên độ {vnd(bd, 1)} điểm %')
+
+    # ---------- B3 · Giới hạn chạy lại có thật sự rẻ hơn ----------
+    print('\n=== B3 · Giới hạn số lần chạy: chi phí cả hệ thống ===')
+    print(f"{'Giới hạn':9s} {'Tổng trợ lý':>13s} {'Không TC':>9s} {'Cả hệ thống':>13s} {'cps':>7s}")
+    b3 = {}
+    for k in [1, 2, 3]:
+        kq = mo_hinh(runs, reqs, max_lan_chay=k)
+        khong_tc = len(reqs) - kq['thanh_cong']
+        he_thong = kq['tong'] + khong_tc * BASELINE  # nhân viên làm thay mỗi ca không thành công
+        b3[k] = (he_thong, kq['cps'], khong_tc)
+        print(f"{k} lần     {vnd(kq['tong']):>13s} {khong_tc:>9d} {vnd(he_thong):>13s} {vnd(kq['cps']):>7s}")
+    k_re = min(b3, key=lambda k: b3[k][0])
+    k_cps = min(b3, key=lambda k: b3[k][1])
+    print(f'Rẻ nhất cho công ty: {k_re} lần ({vnd(b3[k_re][0])} đ) · cps thấp nhất: {k_cps} lần'
+          f' ({vnd(b3[k_cps][1])} đ), đẩy thêm {b3[k_cps][2] - b3[k_re][2]} việc sang nhân viên [simulated]')
+
+    # ---------- B4 · Nếu phải xem lại tất cả (noi_dia + hang_nang) ----------
+    print('\n=== B4 · Xem lại 100% trong phạm vi noi_dia + hang_nang ===')
+    PHUT_XEM_LAI_100 = 5   # phút xem lại mỗi yêu cầu có kết quả (giả định đề)
+    PHUT_LAM_LAI_DE = 9    # phút làm lại mỗi ca (giả định đề)
+    pv_runs = runs[runs.request_id.isin(pv.request_id)]
+    so_co_ok = pv_runs.loc[pv_runs.status == 'ok', 'request_id'].nunique()
+    so_lam_lai = int((pv.ket_qua == 'lam_lai').sum())
+    token_tool_pv = (pv_runs.tokens_in / 1000 * GIA_VAO + pv_runs.tokens_out / 1000 * GIA_RA
+                     + pv_runs.tool_calls * GIA_TOOL).sum()
+    tc_pv = int((pv.ket_qua == 'thanh_cong').sum())
+
+    def cps_b4(phut_xem, phut_lam):
+        return (so_co_ok * phut_xem * LUONG_PHUT + so_lam_lai * phut_lam * LUONG_PHUT + token_tool_pv) / tc_pv
+
+    tien_xem = so_co_ok * PHUT_XEM_LAI_100 * LUONG_PHUT
+    tien_lam = so_lam_lai * PHUT_LAM_LAI_DE * LUONG_PHUT
+    print(f'Yêu cầu có ≥1 lần chạy ok: {so_co_ok} × {PHUT_XEM_LAI_100} phút → {vnd(tien_xem)} đ')
+    print(f'Ca lam_lai: {so_lam_lai} × {PHUT_LAM_LAI_DE} phút → {vnd(tien_lam)} đ')
+    print(f'Token + tool mọi lần chạy của {len(pv)} yêu cầu: {vnd(token_tool_pv)} đ')
+    c9 = cps_b4(PHUT_XEM_LAI_100, PHUT_LAM_LAI_DE)
+    print(f'cps = {vnd(tien_xem + tien_lam + token_tool_pv)} / {tc_pv} = {vnd(c9)} đ'
+          f' = {vnd(c9 / BASELINE, 2)}× của 12.000 đ [simulated]')
+    # Độ nhạy theo phút làm lại thực tế trong dữ liệu
+    phut_lam_tb = reqs.loc[reqs.ket_qua == 'lam_lai', 'phut_lam_lai_simulated'].mean()
+    c_tt = cps_b4(PHUT_XEM_LAI_100, phut_lam_tb)
+    print(f'Nếu làm lại {vnd(phut_lam_tb, 1)} phút/ca (trung bình dữ liệu): cps = {vnd(c_tt)} đ'
+          f' = {vnd(c_tt / BASELINE, 2)}× [simulated]')
+    # Hoà vốn: số phút xem lại tối đa để cps ≤ 12.000 đ
+    for phut_lam in [PHUT_LAM_LAI_DE, phut_lam_tb]:
+        x = (BASELINE * tc_pv - so_lam_lai * phut_lam * LUONG_PHUT - token_tool_pv) / (so_co_ok * LUONG_PHUT)
+        print(f'  Hoà vốn (làm lại {vnd(phut_lam, 1)} phút): mỗi lần xem lại ≤ {vnd(x, 1)} phút [simulated]')
+
     # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
     #   from statsmodels.stats.proportion import proportion_effectsize
     #   from statsmodels.stats.power import NormalIndPower
