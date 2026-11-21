@@ -46,14 +46,16 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Đóng góp cụ thể
 
+### Đóng góp cụ thể
+
 - Đối chiếu kết quả từ `src/lab13.py` với bảng chi phí.
 - Kiểm tra tiền xem lại: 890 × 2.000 = 1.780.000 đ (simulated).
-- Kiểm tra chi phí cả hệ thống khi giới hạn 2 lần chạy:
-  4.093.220 + 234 × 12.000 = 6.901.220 đ (simulated).
-- Cùng trợ lý AI hoàn thiện `report/team/bang_chi_phi.md`.
+- Kiểm tra chi phí cả hệ thống khi giới hạn 2 lần chạy: 4.093.220 + 234 × 12.000 = 6.901.220 đ (simulated).
 - Đối chiếu cỡ mẫu hiệu dụng: 20 × 299 ÷ 6,96 ≈ 859,2 yêu cầu mỗi nhóm.
 - Đối chiếu tỉ lệ mở lại: 51/1.200 = 4,25% toàn mẫu và 39/982 = 3,97% trong phạm vi pilot.
 - Cùng trợ lý AI rà và bổ sung lịch dự kiến vào kế hoạch pilot; chạy chương trình và kiểm tra cú pháp YAML.
+- Đọc hồ sơ launch của nhóm XYZ và tham gia đánh giá chéo Gate 2a.
+- Tham gia câu hỏi về điều kiện giảm tỉ lệ xem lại, ghi câu trả lời của nhóm XYZ vào `report/team/phieu_cham.md`.
 
 ### Bằng chứng
 
